@@ -8,16 +8,16 @@ namespace Frames.DataObject
     public class Photo
     {
        public Int64 photoId { get; set; }
-        public string catId { get; set; }
+        public int catId { get; set; }
         public string userId { get; set; }
         public string photoName { get; set; }
         public string photoDescription { get; set; }
         public string photoTags { get; set; }
-        public double photoPrice { get; set; }
+        public decimal photoPrice { get; set; }
         public string photoLocation { get; set; }
         public string photoFileLocation { get; set; }
-        public string watermarkedLocation { get; set; }
-        public Photo(Int64 id,string name, string description, string tag, double price,string catId)
+        public string WatermarkedLocation { get; set; }
+        public Photo(Int64 id,string name, string description, string tag, decimal price,int catId)
         {
             this.photoName = name;
             this.photoDescription= description;
@@ -26,7 +26,7 @@ namespace Frames.DataObject
             this.photoId = id;
             this.catId = catId;
         }
-        public Photo(string photoLocation, string name, string catId, string description, string tag, double price)
+        public Photo(string photoLocation, string name, int catId, string description, string tag, decimal price, string waterMarkedPath, string realPath)
         {
             this.photoName = name;
             this.photoDescription = description;
@@ -34,6 +34,9 @@ namespace Frames.DataObject
             this.photoPrice = price;
             this.catId = catId;
             this.photoLocation = photoLocation;
+            this.WatermarkedLocation = waterMarkedPath;
+            this.photoFileLocation = realPath;
+
         }
         public Photo() { }
     }

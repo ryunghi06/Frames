@@ -21,13 +21,13 @@ namespace Frames
             TextBox2.Text = photo.photoDescription;
             TextBox3.Text = photo.photoTags;
             TextBox4.Text = photo.photoPrice + "";
-            TextBox5.Text = photo.catId;
+            TextBox5.Text = Convert.ToString(photo.catId);
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
             Photo photo = null;
-            Photo p2 = new Photo(photo.photoId, TextBox1.Text, TextBox2.Text, TextBox3.Text, Convert.ToDouble(TextBox4.Text), TextBox5.Text);
+            Photo p2 = new Photo(photo.photoId, TextBox1.Text, TextBox2.Text, TextBox3.Text, Convert.ToDecimal(TextBox4.Text), Convert.ToInt32(TextBox5.Text));
             DatabaseConn dAO = new DatabaseConn();
             dAO.update(p2);
         }

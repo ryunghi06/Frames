@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using System.Collections;
+using System.Data;
 
 namespace Frames.DatabaseConnector
 {
@@ -23,7 +24,7 @@ namespace Frames.DatabaseConnector
             using (SqlConnection con = GetSqlConnection())
             {
                 Photo p = null;
-                string sql = "select photolocation,photoname,CatID,photodescription,phototags,photoprice from photos where PhotoId=" + id;
+                string sql = "select photolocation,PhotoName,CatID,PhotoDescription,PhotoTags,PhotoPrice,WatermarkedLocation,PhotoFileLocation from Photographs where PhotoId =" + id;
                 using (SqlCommand com = new SqlCommand(sql, con))
                 {
                     con.Open();
@@ -33,7 +34,8 @@ namespace Frames.DatabaseConnector
                         {
                             while (reader.Read())
                             {
-                                p = new Photo(reader.GetString(0), reader.GetString(1), reader.GetInt32(2) + "", reader.GetString(3), reader.GetString(4), (Double)reader.GetDecimal(5));
+                                decimal d = reader.GetDecimal(5);
+                                p = new Photo(reader.GetString(0), reader.GetString(1), reader.GetInt32(2), reader.GetString(3), reader.GetString(4), reader.GetDecimal(5), reader.GetString(6), reader.GetString(7));
                             }
                         }
                         return p;
@@ -47,7 +49,7 @@ namespace Frames.DatabaseConnector
             using (SqlConnection con = GetSqlConnection())
             {
                 Photo p = null;
-                string sql = "select * from photos where UserId = @param1 " ;
+                string sql = "select photolocation,photoname,CatID,photodescription,phototags,photoprice from photos where UserId = @param1 ";
 
                 using (SqlCommand cmd = new SqlCommand())
                 {
@@ -62,7 +64,7 @@ namespace Frames.DatabaseConnector
                         {
                             while (reader.Read())
                             {
-                                p = new Photo(reader.GetString(0), reader.GetString(1), reader.GetInt32(2) + "", reader.GetString(3), reader.GetString(4), (Double)reader.GetDecimal(5));
+                                p = new Photo(reader.GetString(0), reader.GetString(1), reader.GetInt32(2), reader.GetString(3), reader.GetString(4), reader.GetDecimal(5), reader.GetString(6), reader.GetString(7));
                             }
                         }
                     }
@@ -75,7 +77,6 @@ namespace Frames.DatabaseConnector
         {
             using (SqlConnection con = GetSqlConnection())
             {
-
                 string sql = "update Photos set PhotoName='" + photo.photoName + "',PhotoDescription='" + photo.photoDescription + "',PhotoTags='" + photo.photoTags + "',PhotoPrice='" + photo.photoPrice + "',CatId='" + photo.catId + "' where PhotoId='" + photo.photoId + "'";
                 using (SqlCommand com = new SqlCommand(sql, con)) {
                     con.Open();
@@ -88,9 +89,9 @@ namespace Frames.DatabaseConnector
         {
             using (SqlConnection con = GetSqlConnection())
             {
-                List<Photo> list=new List<Photo>();
+                List<Photo> list = new List<Photo>();
                 Photo p = null;
-                string sql = "select photolocation,photoname,CatID,photodescription,phototags,photoprice from Photographs where photoname like '%"+search.getPhotoName()+ "%'and phototags like '%" + search.getPhotoTags()+ "%' and CatID like '%" + search.getCategory()+ "%'";
+                string sql = "select photolocation,photoname,CatID,photodescription,phototags,photoprice from Photographs where photoname like '%" + search.getPhotoName() + "%'and phototags like '%" + search.getPhotoTags() + "%' and CatID like '%" + search.getCategory() + "%'";
                 using (SqlCommand com = new SqlCommand(sql, con))
                 {
                     con.Open();
@@ -100,7 +101,7 @@ namespace Frames.DatabaseConnector
                         {
                             while (reader.Read())
                             {
-                                p = new Photo(reader.GetString(0), reader.GetString(1), reader.GetInt32(2) + "", reader.GetString(3), reader.GetString(4), (Double)reader.GetDecimal(5));
+                                p = new Photo(reader.GetString(0), reader.GetString(1), reader.GetInt32(2), reader.GetString(3), reader.GetString(4), reader.GetDecimal(5), reader.GetString(6), reader.GetString(7));
                                 list.Add(p);
                             }
                         }
@@ -154,6 +155,30 @@ namespace Frames.DatabaseConnector
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public int DownloadPhoto(Int64 photoId, Int64 userID)
+        {
+            int downloadCount = 0;
+            using (SqlConnection con = GetSqlConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("UpsertDownload", con))
+                {                 
+                   
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    // The param names are exactly the same with SP WriteData's
+                    cmd.Parameters.AddWithValue("@photoID", photoId);
+                    cmd.Parameters.AddWithValue("@userID", userID);
+                    SqlParameter returnParameter = cmd.Parameters.AddWithValue("@downloadCount", downloadCount);
+                    returnParameter.Direction = ParameterDirection.Output; ;
+                    //SqlParameter returnParameter = cmd.Parameters.Add("downloadCount", SqlDbType.Int);
+                    //returnParameter.Direction = ParameterDirection.ReturnValue;
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+                    downloadCount = (int)cmd.Parameters["@downloadCount"].Value;
+                }
+            }
+            return downloadCount;
         }
     }
 }

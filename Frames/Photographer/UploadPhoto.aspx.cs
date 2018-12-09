@@ -29,7 +29,7 @@ namespace Frames
             try
             {
                 int phPrice = Convert.ToInt32(txtPhotoPrice.Text);
-                uploadImage.photoPrice = Convert.ToDouble(phPrice);
+                uploadImage.photoPrice = Convert.ToDecimal(phPrice);
             }
             catch
             {
