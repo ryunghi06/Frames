@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Windows.Media.Imaging;
 using Frames.DataObject;
 using Frames.DatabaseConnector;
+using System.Drawing;
+using System.IO;
 
 namespace Frames
 {
@@ -14,6 +16,12 @@ namespace Frames
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+        public byte[] imageToByteArray(System.Drawing.Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            return ms.ToArray();
         }
 
         protected void btnAddPhoto_Click(object sender, EventArgs e)
@@ -48,10 +56,38 @@ namespace Frames
                 uploadImage.photoFileLocation = Server.MapPath("~/Photographers" + uploadImage.userId + "/" + filePhotoUpload.FileName);
 
                 filePhotoUpload.PostedFile.SaveAs(uploadImage.photoFileLocation);
-               
+                Image fileUpload = Image.FromStream(filePhotoUpload.PostedFile.InputStream);
+                Stream imageStreamSource = new FileStream("./images/watermark.png", FileMode.Open, FileAccess.Read, FileShare.Read);
+                BitmapDecoder decoder = BitmapDecoder.Create(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                BitmapFrame frame = decoder.Frames.First();
+
+                
+                BitmapSource bitmapSource = frame;
+
+                // Draw the Image
+               /* Image myImage = Image.F;
+                myImage.Source = bitmapSource;
+                myImage.Stretch = Stretch.None;
+                Image uploadLogo = bitmapSource.;
+
+                using (Graphics g = Graphics.FromImage(fileUpload))
+                {
+                    g.DrawImage(uploadLogo, new Point(fileUpload.Width - uploadLogo.Width - 10, 10));
+
+                    if (!Directory.Exists(Server.MapPath(filePath)))
+                    {
+                        // Create a new directory if the specified directory path doesn't exists 
+                        Directory.CreateDirectory(Server.MapPath(filePath));
+                    }
+
+                    // Save the watermarked image in the new folder created
+                    fileUpload.Save(Path.Combine(Server.MapPath(filePath), fileName));
+                    imgWaterMarked.ImageUrl = filePath + fileName;
+                }
+
                 lblOutputSuccessMsg.Text = "The image " + uploadImage.photoName + " has been uploaded";
                 DatabaseConn dbConn = new DatabaseConn();
-                dbConn.UploadPhoto(uploadImage);
+                dbConn.UploadPhoto(uploadImage);*/
             }
             else
             {

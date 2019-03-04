@@ -26,10 +26,12 @@ namespace Frames
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Photo photo = null;
-            Photo p2 = new Photo(photo.photoId, TextBox1.Text, TextBox2.Text, TextBox3.Text, Convert.ToDecimal(TextBox4.Text), Convert.ToInt32(TextBox5.Text));
-            DatabaseConn dAO = new DatabaseConn();
-            dAO.update(p2);
+            //Photo photo = null;
+            //Photo p2 = new Photo(photo.photoId, TextBox1.Text, TextBox2.Text, TextBox3.Text, Convert.ToDecimal(TextBox4.Text), Convert.ToInt32(TextBox5.Text));
+            //DatabaseConn dAO = new DatabaseConn();
+            //dAO.update(p2);
+
+            
         }
     }
 }

@@ -1,0 +1,253 @@
+﻿.FramesBody {
+    /*background-image: url('../Images/___Josh_Felise__20582735954.jpg');*/
+    background-color: #333;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+    font-family: 'Orbitron', sans-serif;
+}
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+        float: left;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: rgb(4, 7, 12);
+            color: white;
+        }
+
+        /* Add a color to the active/current link */
+        .topnav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+    /* Hide the link that should open and close the topnav on small screens */
+    .topnav .icon {
+        display: none;
+    }
+
+/* Page content */
+.content {
+    padding: 16px;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+    /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+    .sticky + .content {
+        padding-top: 60px;
+    }
+
+/* Video*/
+
+* {
+    box-sizing: border-box;
+}
+
+.video-background {
+    background: #000;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -99;
+}
+
+    .video-foreground,
+    .video-background iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+
+
+
+@media (min-aspect-ratio: 16/9) {
+    .video-foreground {
+        height: 300%;
+        top: -100%;
+    }
+}
+
+@media all and (max-width: 600px) {
+    .vid-info {
+        width: 100%;
+        padding: .5rem;
+    }
+
+        .vid-info h1 {
+            margin-bottom: .2rem;
+        }
+}
+
+@media all and (max-width: 500px) {
+    .vid-info .acronym {
+        display: none;
+    }
+}
+
+
+/* Video 2 */
+
+
+/* Search */
+
+.box {
+    margin: 100px auto;
+    width: 300px;
+    height: 50px;
+}
+
+.container-4 {
+    font-family: 'Orbitron', sans-serif;
+    overflow: hidden;
+    width: 300px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+    .container-4 button.icon {
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        -moz-border-radius-topright: 5px;
+        -moz-border-radius-bottomright: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border: none;
+        background: #232833;
+        height: 50px;
+        width: 50px;
+        color: #4f5b66;
+        opacity: 0;
+        font-size: 10pt;
+        -webkit-transition: all .55s ease;
+        -moz-transition: all .55s ease;
+        -ms-transition: all .55s ease;
+        -o-transition: all .55s ease;
+        transition: all .55s ease;
+    }
+
+    .container-4 input#search {
+        font-family: 'Orbitron', sans-serif;
+        width: 300px;
+        height: 50px;
+        background: #2b303b;
+        border: none;
+        font-size: 10pt;
+        float: left;
+        color: white;
+        padding-left: 15px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+        .container-4 input#search::-webkit-input-placeholder {
+            color: white;
+        }
+
+        .container-4 input#search:-moz-placeholder { /* Firefox 18- */
+            color: white;
+        }
+
+        .container-4 input#search::-moz-placeholder { /* Firefox 19+ */
+            color: white;
+        }
+
+        .container-4 input#search:-ms-input-placeholder {
+            color: white;
+        }
+
+.container-1 .icon {
+    position: absolute;
+    top: 50%;
+    margin-left: 17px;
+    margin-top: 17px;
+    z-index: 1;
+    color: #4f5b66;
+}
+
+.container-4:hover button.icon, .container-4:active button.icon, .container-4:focus button.icon {
+    outline: none;
+    opacity: 1;
+    margin-left: -50px;
+}
+
+    .container-4:hover button.icon:hover {
+        background: white;
+    }
+
+/*Images gallery*/
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+}
+
+    .column img {
+        margin-top: 8px;
+        vertical-align: middle;
+    }
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+    .column {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+
+/*Font title*/
+
+.w3-lobster {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+}
+
+.header {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.footer {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+}

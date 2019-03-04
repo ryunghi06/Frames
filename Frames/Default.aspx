@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="WebApplication1.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs"  EnableEventValidation="false" Inherits="Frames.Default" %>
 
 <!DOCTYPE html>
 <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
@@ -8,43 +8,53 @@
 <!-- Load an font library -->
 <link href="https://fonts.googleapis.com/css?family=Orbitron:700" rel="stylesheet">  
 <!-- Css -->
-<link href="css/StyleSheet1.css" rel="stylesheet" />
-<html>
+
+<!-- bootsrap css -->
+<link rel="stylesheet" href="css/FramesDefaultStyle.css" />
+<link rel="stylesheet" href ="css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css">
+<script type="text/javascript" src="./js/angular-1.7.7/angular.min.js"></script>
+<script type="text/javascript" src="./js/angular-1.7.7/angular-aria.min.js"></script>
+<script type="text/javascript" src="./js/angular-1.7.7/angular-route.min.js"></script>
+<script type="text/javascript" src="./js/angular-1.7.7/angular-messages.min.js"></script>
+<script type="text/javascript" src="./js/angular-1.7.7/angular-animate.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.js"></script>
+<script  type="text/javascript"  src="./js/PopupController.js"></script>
+ <html >
     <head>
         <meta charset="utf-8" />
         <title>Frames - The Website</title>
     </head>
 
-    <body>
-        <div class="w3-container w3-lobster">
-            <h1>Frames: Feel Alive</h1>
-</div>
+    <body class="FramesBody" data-ng-app="FramesPopup">
+
+       <div data-ng-controller="PopupController" id="popupContainer" class="topnav" ng-cloak>
+           
+           <form runat="server">
+               <!--<md-button class="btn btn-dark" ng-click="showAlert($event)">
+                   Alert Dialog
+               </md-button>-->
+               <md-button class="md-primary md-raised" style="background-color:black">Gallery</md-button>
+               <md-button class="md-primary md-raised" style="background-color:black">About Us</md-button>
+               <md-button class="md-primary md-raised" style="background-color:black">Contact Us</md-button>
+               <md-button class="md-primary md-raised" style="background-color:black">Sign Up</md-button>
+               <md-button class="md-primary md-raised" style="background-color:black" ng-click="ShowSignin($event)" text="Sign In">Sign In</md-button>
+           </form>
+
+       </div>
+
+       <div class="box">
+           <div class="container-4">
+               <input type="search" id="search" placeholder="Search..." />
+               <button class="icon"><i class="fa fa-search"></i></button>
+           </div>
+       </div>
             
-
-        <div class="topnav">
-                <a class="active" href="#"><i class="fa fa-home"></i> Gallery</a> 
-                <a href="#"><i class="fa fa-globe"></i> Services</a>
-                <a href="#">Blog</a> 
-                <a href="#">About Us</a>
-                <a href="#"><i class="fa fa-envelope"></i> Contact Us</a>
-                <a href="#"><i class="fa fa-fw fa-user"></i> Sign Up</a>
-                <a href="#"><i class="fa fa-fw fa-user"></i> Login</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-    <i class="fa fa-bars"></i>
-        </div>
-
-            <div class="box">
-  <div class="container-4">
-    <input type="search" id="search" placeholder="Search..." />
-    <button class="icon"><i class="fa fa-search"></i></button>
-  </div>
-</div>
-
 <!-- Header -->
 <div class="header">
   <h1>Frames Gallery</h1>
 </div>
-
+        
 <!-- Photo Grid -->
 <div class="row"> 
   <div class="column">
@@ -85,12 +95,7 @@
         <div class="footer">
             <p>Frames Copyright@2018 - All rights reserved<br />
         </div>
-        <div class="video-background">
-    <div class="video-foreground">
-      <iframe src="https://www.youtube.com/embed/_nE8AhurAs0?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&playlist=W0LHTWG-UmQ" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </div>
-
+        
 
 
 
